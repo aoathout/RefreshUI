@@ -7,12 +7,11 @@ public struct Token: Identifiable {
 }
 
 public extension List {
-    func onPull(perform: @escaping () -> Void, isLoading: Bool) -> some View {
+    func onPull(label: String? = nil, perform: @escaping () -> Void, isLoading: Bool) -> some View {
         onPull(perform: perform, isLoading: isLoading, token: Token(id: 1))
     }
     
-    func onPull<T: Identifiable>(perform: @escaping () -> Void, isLoading: Bool, token: T) -> some View where T.ID == Int {
-        
+    func onPull<T: Identifiable>(label: String? = nil, perform: @escaping () -> Void, isLoading: Bool, token: T) -> some View where T.ID == Int {
         // run in body calculation
         if isLoading {
             NotificationCenter.default.post(name: .beginRefreshing, object: nil, userInfo: ["id" : token.id])
@@ -26,6 +25,9 @@ public extension List {
             guard let tableView = tableViewWrapper.subviews.first as? UITableView else { return }
             if tableView.refreshControlHandler == nil && tableView.refreshControl == nil {
                 let refreshControl = UIRefreshControl()
+                if let label = label {
+                    refreshControl.attributedTitle = NSAttributedString(string: label)
+                }
                 let handler = PullToRefreshHandler(refreshControl: refreshControl, id: token.id)
                 handler.onPull = perform
                 tableView.refreshControlHandler = handler
