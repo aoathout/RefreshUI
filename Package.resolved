@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "Rotoscope",
-        "repositoryURL": "git@github.com:noppefoxwolf/Rotoscope.git",
+        "repositoryURL": "https://github.com/noppefoxwolf/Rotoscope.git",
         "state": {
           "branch": null,
           "revision": "99da0c0f2f9c3afde63c72cd15d910e5f504d057",
