@@ -7,11 +7,11 @@ public struct Token: Identifiable {
 }
 
 public extension List {
-    func onPull(label: String? = nil, perform: @escaping () -> Void, isLoading: Bool) -> some View {
+    func onPull(label: String? = nil, perform: @escaping () -> Void, isLoading: Binding<Bool>) -> some View {
         onPull(label: label, perform: perform, isLoading: isLoading, token: Token(id: 1))
     }
     
-    func onPull<T: Identifiable>(label: String? = nil, perform: @escaping () -> Void, isLoading: Bool, token: T) -> some View where T.ID == Int {
+    func onPull<T: Identifiable>(label: String? = nil, perform: @escaping () -> Void, isLoading: Binding<Bool>, token: T) -> some View where T.ID == Int {
         // run in body calculation
         if isLoading {
             NotificationCenter.default.post(name: .beginRefreshing, object: nil, userInfo: ["id" : token.id])
