@@ -8,7 +8,7 @@ public struct Token: Identifiable {
 
 public extension List {
     func onPull(label: String? = nil, perform: @escaping () -> Void, isLoading: Bool) -> some View {
-        onPull(perform: perform, isLoading: isLoading, token: Token(id: 1))
+        onPull(label: label, perform: perform, isLoading: isLoading, token: Token(id: 1))
     }
     
     func onPull<T: Identifiable>(label: String? = nil, perform: @escaping () -> Void, isLoading: Bool, token: T) -> some View where T.ID == Int {
