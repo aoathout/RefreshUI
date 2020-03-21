@@ -13,7 +13,7 @@ public extension List {
     
     func onPull<T: Identifiable>(label: String? = nil, perform: @escaping () -> Void, isLoading: Binding<Bool>, token: T) -> some View where T.ID == Int {
         // run in body calculation
-        if isLoading {
+        if isLoading.wrappedValue {
             NotificationCenter.default.post(name: .beginRefreshing, object: nil, userInfo: ["id" : token.id])
         } else {
             NotificationCenter.default.post(name: .endRefreshing, object: nil, userInfo: ["id" : token.id])
